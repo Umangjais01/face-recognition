@@ -40,7 +40,7 @@ loaded_resnet = resnet.ResNet18(CHANNELS, resnet.ResBlock, outputs=len(class_nam
 target_dir = "models"
 target_dir_path = Path(target_dir)
 model_name = "faces270524U.pt"
-model_load_path = "/home/umang/Desktop/working/models/faces270524U.pt"
+model_load_path = "models/faces270524U.pt"
 if not os.path.exists(model_load_path):
     raise FileNotFoundError(f"The file does not exist: {model_load_path}")
 

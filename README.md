@@ -13,7 +13,11 @@ now:- in predctor.py file take base_64 input as kajal's output i.e {data}
 
 
 
- source myenv/bin/activate
+ 
 
-source /home/umang/Desktop/face_recognition/myenv/bin/activate
+
+python3 -m venv myenv 
+source myenv/bin/activate
+pip install split-folders
+pip install torch torchvision tqdm flask matplotlib requests opencv-python pandas
 

@@ -60,7 +60,7 @@ def signup():
     employee_folder = os.getcwd()
     print("Current directory after changing to employee folder: ", employee_folder)
     # output_folder = "/home/umang/Desktop/working/faces/aligned"
-    output_folder = f"/home/umang/Desktop/working/faces/aligned/{employee_id}"
+    output_folder = f"faces/aligned/{employee_id}"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
