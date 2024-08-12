@@ -74,7 +74,11 @@ def signup():
         print(f"Saved image: {image_filename}")
 
         result = cenrted_final.Face_Alignment(image_filename, output_folder)
-        print (f"status : {result}")
+        print (f"status for {i} : {result}")
+        if result == 0:
+            print("Face not found , stopping further processing.")
+            break
+        
         
 
     
