@@ -176,4 +176,3 @@ def prepare_and_train_model():
     myfunctions1.save_model(model=resnet18, target_dir="models", model_name="faces270524U.pt")
     print("Model training and saving completed.")
     return
-

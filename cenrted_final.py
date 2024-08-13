@@ -30,16 +30,15 @@ def trignometry_for_distance(a, b):
 # source :- from open source GFG(link :- https://www.geeksforgeeks.org/face-alignment-with-opencv-and-python/ )
 def Face_Alignment(img_path, output_folder):
     img_raw = cv2.imread(img_path)
-    if img_raw is None:
-        return 0
+    
     
     # plt.imshow(img_raw[:, :, ::-1])
     # plt.show()
 
     img, gray_img, face_found = face_detection(img_raw)
     
-    if not face_found:
-        return 0
+    # if not face_found:
+    #     return 0
 
     eyes = eye_detector.detectMultiScale(gray_img)
 
@@ -69,13 +68,13 @@ def Face_Alignment(img_path, output_folder):
         right_eye_center = (int(right_eye[0] + (right_eye[2]/2)), int(right_eye[1] + (right_eye[3]/2)))
         right_eye_x = right_eye_center[0]
         right_eye_y = right_eye_center[1]
-        cv2.circle(img, right_eye_center, 2, (255, 0, 0), 3)
+        # cv2.circle(img, right_eye_center, 2, (255, 0, 0), 3)
 
         # center of left eye
         left_eye_center = (int(left_eye[0] + (left_eye[2] / 2)), int(left_eye[1] + (left_eye[3] / 2)))
         left_eye_x = left_eye_center[0]
         left_eye_y = left_eye_center[1]
-        cv2.circle(img, left_eye_center, 2, (255, 0, 0), 3)
+        # cv2.circle(img, left_eye_center, 2, (255, 0, 0), 3)
 
         # finding rotation direction
         if left_eye_y > right_eye_y:
@@ -87,7 +86,7 @@ def Face_Alignment(img_path, output_folder):
             point_3rd = (left_eye_x, right_eye_y)
             direction = 1 # rotate inverse direction of clock
 
-        cv2.circle(img, point_3rd, 2, (255, 0, 0), 2)
+        # cv2.circle(img, point_3rd, 2, (255, 0, 0), 2)
         a = trignometry_for_distance(left_eye_center, point_3rd)
         b = trignometry_for_distance(right_eye_center, point_3rd)
         c = trignometry_for_distance(right_eye_center, left_eye_center)
@@ -109,7 +108,6 @@ def Face_Alignment(img_path, output_folder):
         output_path = os.path.join(output_folder, os.path.basename(img_path))
         cv2.imwrite(output_path, new_img)
         print(f"Aligned face saved to {output_path}")
-
         return 1
     
 

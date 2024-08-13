@@ -12,6 +12,9 @@ before :- it was asking from asktoopen from local system
 now:- in predctor.py file take base_64 input as kajal's output i.e {data}
 
 
+Error1:  like fc.weight/ fc.bias(...)
+solution - check if model is present there or not
+
 
  
 

@@ -103,4 +103,3 @@ def predict_from_base64(base64_string):
     # plt.imshow(numpy_image)
     # plt.show()
   
-
