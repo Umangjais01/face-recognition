@@ -126,7 +126,7 @@ def train_model(model, train_dataloader, test_dataloader, num_epochs, device, pa
     return model
 
 def prepare_and_train_model():
-    input_folder = "/home/umang/Desktop/working/dataset"
+    input_folder = "dataset"
     output = "facesplit"
     
     # Split the dataset
