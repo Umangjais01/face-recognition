@@ -44,7 +44,7 @@ model_load_path = "models/faces270524U.pt"
 if not os.path.exists(model_load_path):
     raise FileNotFoundError(f"The file does not exist: {model_load_path}")
 
-loaded_resnet.fc = torch.nn.Linear(512, 10)  # Assuming the saved model had 10 classes
+loaded_resnet.fc = torch.nn.Linear(512, len(class_names))  # Assuming the saved model had 10 classes
 loaded_resnet.load_state_dict(torch.load(f=model_load_path, map_location=torch.device('cpu')))
 loaded_resnet = loaded_resnet.to(device)
 
@@ -64,15 +64,15 @@ def predict_from_base64(base64_string):
     # Display the image
     # image.show()
 
-    print("OPENNNN IMGE")
-    plt.imshow(image)
-    plt.axis('off')  # Hide the axis
-    plt.title("Input Image")
-    plt.show()
+    # print("OPENNNN IMGE")
+    # plt.imshow(image)
+    # plt.axis('off')  # Hide the axis
+    # plt.title("Input Image")
+    # plt.show()
 
     # Transform the image and prepare for inference
     tensor1 = test_transforms(image)
-    numpy_image = tensor1.permute(1, 2, 0).numpy()
+    # numpy_image = tensor1.permute(1, 2, 0).numpy()
     img_single = torch.unsqueeze(tensor1, dim=0).to(device)
 
     # Perform a forward pass on the image
@@ -86,12 +86,12 @@ def predict_from_base64(base64_string):
     max_prob = soft[0, label_new].cpu().item()
 
     if max_prob < THRESHOLD:
-        idname = "Unknown" + str(max_prob.numpy())
-        print(idname)
+        idname = "Unknown" 
+        # print(idname)
         return "Unknown"
     else:
         idname =  str(max_prob)
-        print("percentage ",idname)   
+        # print("percentage ",idname)   
         # return class_names[label_new]
         return idname
 
@@ -103,3 +103,4 @@ def predict_from_base64(base64_string):
     # plt.imshow(numpy_image)
     # plt.show()
   
+

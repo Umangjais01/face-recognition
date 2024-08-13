@@ -95,21 +95,45 @@ def plot_predictions(
 
 
 # Calculate accuracy (a classification metric)
-def accuracy_fn(y_true, y_pred):
-    """Calculates accuracy between truth labels and predictions.
 
-    Args:
-        y_true (torch.Tensor): Truth labels for predictions.
-        y_pred (torch.Tensor): Predictions to be compared to predictions.
-
-    Returns:
-        [torch.float]: Accuracy value between y_true and y_pred, e.g. 78.45
+def accuracy_fn(y_true: torch.Tensor, y_pred: torch.Tensor) -> float:
     """
-    correct = torch.eq(y_true, y_pred).sum().item()
-    acc = (correct / len(y_pred)) * 100
-    return acc
-
-
+    Calculate accuracy of predictions.
+    
+    Args:
+    - y_true (torch.Tensor): Ground truth labels.
+    - y_pred (torch.Tensor): Model predictions (logits or probabilities).
+    
+    Returns:
+    - float: Accuracy score.
+    """
+    # Ensure y_true and y_pred are of the same shape
+    if y_true.size(0) != y_pred.size(0):
+        raise ValueError("The number of samples in y_true and y_pred must be the same.")
+    
+    # Get the class indices for predictions
+    if y_pred.dim() > 1 and y_pred.size(1) > 1:
+        # If y_pred contains probabilities, use argmax to get class indices
+        y_pred_classes = torch.argmax(y_pred, dim=1)
+    else:
+        # If y_pred contains class indices directly
+        y_pred_classes = y_pred
+    
+    # Ensure y_pred_classes is 1-dimensional
+    if y_pred_classes.dim() > 1:
+        y_pred_classes = y_pred_classes.squeeze()
+    
+    # Check if y_true is one-hot encoded and convert if necessary
+    if y_true.dim() > 1 and y_true.size(1) > 1:
+        y_true = torch.argmax(y_true, dim=1)
+    
+    # Compute the number of correct predictions
+    correct = torch.eq(y_true, y_pred_classes).sum().item()
+    
+    # Compute accuracy
+    accuracy = correct / len(y_true) if len(y_true) > 0 else 0.0
+    
+    return accuracy
 def print_train_time(start, end, device=None):
     """Prints difference between start and end time.
 
